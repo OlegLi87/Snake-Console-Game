@@ -19,7 +19,8 @@ while (true)
     Thread.Sleep(16);
 }
 
-
+Console.Clear();
+Console.WriteLine("Game Over");
 Console.ReadKey();
 
 

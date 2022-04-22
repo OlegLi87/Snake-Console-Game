@@ -20,6 +20,7 @@ internal class Snake : IMovable
         foreach (var bp in bodyPieces)
             bp.Move(null);
 
+        // Enlarging the snake at game start up to minimum length.
         if (_snakeMembers.Count < _minLength)
             growSnake();
     }
@@ -41,7 +42,7 @@ internal class Snake : IMovable
 
     private void growSnake()
     {
-        var lastSnakeMember = _snakeMembers[_snakeMembers.Count - 1];
+        var lastSnakeMember = _snakeMembers[^1];
         var snakeBodyPiece = new SnakeBodyPiece(lastSnakeMember, lastSnakeMember.PreviousCoordinate!);
         _snakeMembers.Add(snakeBodyPiece);
     }
