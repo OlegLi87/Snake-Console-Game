@@ -1,0 +1,5 @@
+C:\Programming\Final Projects\SnakeConsoleGame\game_ui\obj\Debug\net5.0-windows\game_ui.csproj.AssemblyReference.cache
+C:\Programming\Final Projects\SnakeConsoleGame\game_ui\obj\Debug\net5.0-windows\game_ui.GeneratedMSBuildEditorConfig.editorconfig
+C:\Programming\Final Projects\SnakeConsoleGame\game_ui\obj\Debug\net5.0-windows\game_ui.AssemblyInfoInputs.cache
+C:\Programming\Final Projects\SnakeConsoleGame\game_ui\obj\Debug\net5.0-windows\game_ui.AssemblyInfo.cs
+C:\Programming\Final Projects\SnakeConsoleGame\game_ui\obj\Debug\net5.0-windows\game_ui.csproj.CoreCompileInputs.cache

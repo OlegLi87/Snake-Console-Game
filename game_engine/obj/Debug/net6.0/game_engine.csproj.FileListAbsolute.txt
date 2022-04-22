@@ -1,0 +1,12 @@
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\bin\Debug\net6.0\game_engine.deps.json
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\bin\Debug\net6.0\game_engine.dll
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\bin\Debug\net6.0\game_engine.pdb
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\obj\Debug\net6.0\game_engine.csproj.AssemblyReference.cache
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\obj\Debug\net6.0\game_engine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\obj\Debug\net6.0\game_engine.AssemblyInfoInputs.cache
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\obj\Debug\net6.0\game_engine.AssemblyInfo.cs
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\obj\Debug\net6.0\game_engine.csproj.CoreCompileInputs.cache
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\obj\Debug\net6.0\game_engine.dll
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\obj\Debug\net6.0\refint\game_engine.dll
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\obj\Debug\net6.0\game_engine.pdb
+C:\Programming\Final Projects\SnakeConsoleGame\game_engine\obj\Debug\net6.0\ref\game_engine.dll
