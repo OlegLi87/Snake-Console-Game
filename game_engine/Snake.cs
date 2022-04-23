@@ -22,7 +22,7 @@ internal class Snake : IMovable
 
         // Enlarging the snake at game start up to minimum length.
         if (_snakeMembers.Count < _minLength)
-            growSnake();
+            SnakeGrow();
     }
 
     public bool IsCoordinateOnSnake(Coordinate coordinate, bool checkHead = true)
@@ -34,16 +34,17 @@ internal class Snake : IMovable
         return hittedMember is not null;
     }
 
+    public void SnakeGrow()
+    {
+        var lastSnakeMember = _snakeMembers[^1];
+        var snakeBodyPiece = new SnakeBodyPiece(lastSnakeMember, lastSnakeMember.PreviousCoordinate!);
+        _snakeMembers.Add(snakeBodyPiece);
+    }
+
     public Coordinate GetHeadCoordinate() =>
        _snakeMembers.First(sm => sm is SnakeHead).CurrentCoordinate;
 
     public IEnumerable<Coordinate> GetAllCoordinates() =>
        _snakeMembers.Select(sm => sm.CurrentCoordinate);
 
-    private void growSnake()
-    {
-        var lastSnakeMember = _snakeMembers[^1];
-        var snakeBodyPiece = new SnakeBodyPiece(lastSnakeMember, lastSnakeMember.PreviousCoordinate!);
-        _snakeMembers.Add(snakeBodyPiece);
-    }
 }

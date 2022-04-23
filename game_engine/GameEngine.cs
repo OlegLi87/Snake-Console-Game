@@ -2,34 +2,46 @@
 
 public class GameEngine
 {
-    private const int minSnakeLength = 5;
+    private const int MIN_SNAKE_LENGTH = 5;
+    private const int POINTS_FOR_EAT = 10;
     private Direction _snakeMoveDirection;
     private Rectangle _activeZone;
     private Snake _snake;
     private Coordinate _foodCoordinate;
+    private int _score;
 
     public GameEngine(Rectangle activeZone)
     {
         _activeZone = activeZone;
         _snakeMoveDirection = (Direction)Utils.GetRandomNumber(0, Enum.GetNames(typeof(Direction)).Count());
-        _snake = new Snake(getStartCoordinate(), minSnakeLength);
+        _snake = new Snake(getStartCoordinate(), MIN_SNAKE_LENGTH);
         _foodCoordinate = getFoodCoordinate();
     }
 
     public void Move() =>
       _snake.Move(_snakeMoveDirection);
 
-    public void ChangeMoveDirection(Direction direction) =>
-       _snakeMoveDirection = direction;
+    public void ChangeMoveDirection(Direction direction)
+    {
+        if ((_snakeMoveDirection == Direction.Up && direction == Direction.Down)
+           || (_snakeMoveDirection == Direction.Down && direction == Direction.Up)
+            || (_snakeMoveDirection == Direction.Left && direction == Direction.Right)
+             || (_snakeMoveDirection == Direction.Right && direction == Direction.Left))
+            return;
+
+        _snakeMoveDirection = direction;
+    }
 
     public GameState GetGameState()
     {
+        checkIfFoodEaten();
+
         return new GameState
         {
             IsGameOver = isGameOver(),
             SnakeCoordinates = _snake.GetAllCoordinates(),
             FoodCoordinate = _foodCoordinate,
-            IsFoodEaten = isFoodEaten()
+            Score = _score
         };
     }
 
@@ -75,6 +87,14 @@ public class GameEngine
         return false;
     }
 
-    private bool isFoodEaten() =>
-      _snake.IsCoordinateOnSnake(_foodCoordinate);
+    private void checkIfFoodEaten()
+    {
+        if (_snake.IsCoordinateOnSnake(_foodCoordinate))
+        {
+            _score += POINTS_FOR_EAT;
+            _snake.SnakeGrow();
+            _foodCoordinate = getFoodCoordinate();
+        }
+    }
+
 }

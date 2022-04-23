@@ -6,34 +6,37 @@ namespace game_ui;
 internal class GameUi
 {
     public readonly double ActiveZoneToWindowRatio = 0.75;
-    private IEnumerable<SelfDrawableElement> drawables;
+    private IEnumerable<SelfDrawableElement> _drawables;
 
     public Rectangle PlayableZone
     {
         get
         {
-            var activeZone = drawables.First(dr => dr is ActiveZone) as ActiveZone;
+            var activeZone = _drawables.First(dr => dr is ActiveZone) as ActiveZone;
             return activeZone!.PlayableZone;
         }
     }
 
     public GameUi() =>
-        drawables = getSelfDrawables();
+        _drawables = getSelf_Drawables();
 
     public void Draw(GameState gameState)
     {
-        foreach (var drawable in drawables)
-        {
-            if (drawable is ActiveZone a)
-                a.Draw(null);
-            else if (drawable is Snake s)
-                s.Draw(gameState.SnakeCoordinates);
-            else if (drawable is Food f)
-                f.Draw(new[] { gameState.FoodCoordinate });
-        }
+        foreach (var drawable in _drawables)
+            drawable.Draw(gameState);
     }
 
-    private IEnumerable<SelfDrawableElement> getSelfDrawables()
+    public void GameOver()
+    {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.SetCursorPosition(Console.WindowWidth / 2 - "Game Over".Length / 2
+           , Console.WindowHeight / 2);
+
+        Console.Write("Game Over");
+    }
+
+    private IEnumerable<SelfDrawableElement> getSelf_Drawables()
     {
         var list = new List<SelfDrawableElement>();
 
@@ -42,16 +45,19 @@ internal class GameUi
         var activeZoneSize = getActiveZoneSize();
         var activeZoneOrigin = new Coordinate((Console.WindowWidth - activeZoneSize.Width) / 2
                                   , (Console.WindowHeight - activeZoneSize.Height) / 2);
-        var activeZone = new ActiveZone('@', activeZoneOrigin, activeZoneSize, xBorder, yBorder);
+        var activeZone = new ActiveZone('@', activeZoneOrigin, activeZoneSize, xBorder, yBorder, ConsoleColor.Blue);
 
         // creates snake
         var snakeOrigin = new Coordinate(activeZoneOrigin.X + xBorder, activeZoneOrigin.Y + yBorder);
-        var snake = new Snake('#', snakeOrigin);
+        var snake = new Snake('#', snakeOrigin, ConsoleColor.Green);
 
         // creates food
-        var food = new Food('$', snakeOrigin);
+        var food = new Food('$', snakeOrigin, ConsoleColor.Red);
 
-        list.AddRange(new SelfDrawableElement[] { activeZone, snake, food });
+        // creates score display
+        var scoreDisplay = new ScoreDisplay(default, new Coordinate(0, 0), ConsoleColor.Cyan);
+
+        list.AddRange(new SelfDrawableElement[] { activeZone, snake, food, scoreDisplay });
         return list;
     }
 

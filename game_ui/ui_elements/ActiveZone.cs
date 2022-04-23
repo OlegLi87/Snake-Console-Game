@@ -1,3 +1,4 @@
+using System.Globalization;
 using game_engine;
 
 namespace game_ui.ui_elements;
@@ -24,15 +25,17 @@ internal class ActiveZone : SelfDrawableElement
     }
 
     public ActiveZone(char uiChar, Coordinate relativeToCoordinate
-       , Rectangle size, int borderWidthX, int borderWidthY) : base(uiChar, relativeToCoordinate)
+       , Rectangle size, int borderWidthX, int borderWidthY, ConsoleColor color) : base(uiChar, relativeToCoordinate, color)
     {
         _size = size;
         _borderWidthX = borderWidthX;
         _borderWidthY = borderWidthY;
     }
 
-    public override void Draw(IEnumerable<Coordinate>? coordinates, ConsoleColor color = ConsoleColor.White)
+    public override void Draw(GameState game)
     {
+        Console.ForegroundColor = Color;
+
         for (int i = 0; i < _size.Height; i++)
         {
             Console.CursorLeft = RelativeToCoordinate.X;
@@ -47,6 +50,9 @@ internal class ActiveZone : SelfDrawableElement
                 else
                     Console.Write(" ");
             }
+
+            for (int j = RelativeToCoordinate.X + _size.Width + 1; j++ < Console.WindowWidth;)
+                Console.Write(" ");
         }
     }
 }
